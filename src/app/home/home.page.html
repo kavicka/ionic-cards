@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      The best cities
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let city of cities">
+        <ion-card>
+          <img src="{{city.url}}">
+          <ion-card-header>
+            <ion-card-subtitle>{{city.cityName}}</ion-card-subtitle>
+            <ion-card-title>{{city.state}}</ion-card-title>
+            <ion-button color="tertiary" size="small" (click)="favourite(city.id)" 
+            [disabled]="city.isDisabled" icon-start>
+              {{city.favouriteBtn}}
+          </ion-button>
+          <div class="icon">
+            <ion-icon name="heart" class="favIcon" *ngIf="city.fav == true" item-right></ion-icon>
+          </div>  
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{city.paragraph}}</p>
+
+            <div id="gridIcon">
+              <ion-icon name="{{city.icon1}}"></ion-icon>
+              <span>
+                {{city.info}}<br>
+              </span>
+
+              <ion-icon name="{{city.icon2}}"></ion-icon>
+              <span>
+                {{city.info2}}<br>
+              </span>
+
+              <ion-icon name="{{city.icon3}}"></ion-icon>
+              <span>
+                  {{city.info3}}<br>
+              </span>
+
+              <ion-icon name="{{city.icon4}}"></ion-icon>
+              <span>
+                  {{city.info4}}<br>
+              </span>
+            </div>
+
+            <ion-button (click)="visited(city.id)" fill="{{city.fill}}" color="success">Visited</ion-button>
+            <ion-button (click)="vote(city.id)" color="primary" *ngIf="city.hideVote == true">{{city.buttonTitle}}</ion-button>
+            
+            <p>Votes: {{city.votes}}</p>
+            <p *ngIf="city.votes == 10">{{city.maxVotesMessage}}</p>
+
+            <ion-button (click)="reset(city.id)" color="success" *ngIf="city.hide == true">{{city.resetVotes}}</ion-button>
+          </ion-card-content>  
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </div>
+</ion-content>
